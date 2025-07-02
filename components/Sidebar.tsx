@@ -40,33 +40,38 @@ export function Sidebar({ activeTab, setActiveTab }: SidebarProps) {
       sidebar-transition glass-effect flex flex-col relative z-20
     `}>
       {/* Header with Logo and Toggle */}
-      <div className="p-4 border-b border-gray-800/50 flex items-center justify-between">
-        <div className="flex items-center space-x-3 overflow-hidden">
-          <div className="flex-shrink-0">
-            <img
-              src="/logo.png"
-              alt="Pulse Logo"
-              width={32}
-              height={32}
-              className="rounded-lg"
-            />
+      <div className="p-4 border-b border-gray-800/50">
+        {!isCollapsed ? (
+          <div className="flex items-center justify-between">
+            <div className="flex items-center space-x-3 overflow-hidden">
+              <div className="flex-shrink-0"> <img src="/logo.png" alt="Pulse Logo" width={32} height={32} className="rounded-lg" /> 
+              </div>
+              <span className="text-xl font-bold text-white sidebar-logo-text sidebar-logo-text-visible">
+                Pulse
+              </span>
+            </div>
+            
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={toggleSidebar}
+              className="apple-button text-gray-400 hover:text-white hover:bg-gray-800/50 flex-shrink-0"
+            >
+              <X size={18} />
+            </Button>
           </div>
-          <span className={`
-            text-xl font-bold text-white sidebar-logo-text
-            ${isCollapsed ? 'sidebar-logo-text-hidden' : 'sidebar-logo-text-visible'}
-          `}>
-            Pulse
-          </span>
-        </div>
-        
-        <Button
-          variant="ghost"
-          size="icon"
-          onClick={toggleSidebar}
-          className="apple-button text-gray-400 hover:text-white hover:bg-gray-800/50 flex-shrink-0"
-        >
-          {isCollapsed ? <Menu size={18} /> : <X size={18} />}
-        </Button>
+        ) : (
+          <div className="flex justify-center">
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={toggleSidebar}
+              className="apple-button text-gray-400 hover:text-white hover:bg-gray-800/50"
+            >
+              <Menu size={18} />
+            </Button>
+          </div>
+        )}
       </div>
 
       {/* Navigation */}
@@ -81,7 +86,7 @@ export function Sidebar({ activeTab, setActiveTab }: SidebarProps) {
                 <button
                   onClick={() => setActiveTab(item.id)}
                   className={`
-                    w-full flex items-center space-x-3 px-3 py-2.5 rounded-lg 
+                    w-full flex items-center space-x-3 px-2 py-2.5 rounded-lg 
                     apple-button transition-all duration-200 group relative overflow-hidden
                     ${isActive
                       ? 'bg-gray-800/60 text-white border border-gray-700/50 shadow-lg'
@@ -98,10 +103,7 @@ export function Sidebar({ activeTab, setActiveTab }: SidebarProps) {
                     {item.label}
                   </span>
                   
-                  {/* Active indicator */}
-                  {isActive && (
-                    <div className="absolute right-2 w-2 h-2 bg-white rounded-full opacity-60" />
-                  )}
+                    {/* Active indicator */}
                 </button>
               </li>
             );
