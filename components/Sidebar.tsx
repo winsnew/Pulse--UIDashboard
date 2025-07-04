@@ -40,7 +40,7 @@ export function Sidebar({ activeTab, setActiveTab }: SidebarProps) {
       sidebar-transition glass-effect flex flex-col relative z-20
     `}>
       {/* Header with Logo and Toggle */}
-      <div className="p-4 border-b border-gray-800/50">
+      <div className="p-3 border-b border-gray-800/50">
         {!isCollapsed ? (
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-3 overflow-hidden">
