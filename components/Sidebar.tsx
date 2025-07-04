@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { 
   Home, 
   Users, 
@@ -8,14 +8,14 @@ import {
   Newspaper, 
   Bell, 
   BarChart3,
-  Menu,
-  X
+  Menu
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 interface SidebarProps {
   activeTab: string;
   setActiveTab: (tab: string) => void;
+  onCollapseChange?: (collapsed: boolean) => void;
 }
 
 const navigation = [
@@ -27,51 +27,45 @@ const navigation = [
   { id: 'market', label: 'MarketView', icon: BarChart3 },
 ];
 
-export function Sidebar({ activeTab, setActiveTab }: SidebarProps) {
+export function Sidebar({ activeTab, setActiveTab, onCollapseChange }: SidebarProps) {
   const [isCollapsed, setIsCollapsed] = useState(false);
 
   const toggleSidebar = () => {
-    setIsCollapsed(!isCollapsed);
+    const newCollapsed = !isCollapsed;
+    setIsCollapsed(newCollapsed);
+    onCollapseChange?.(newCollapsed);
   };
+
+  useEffect(() => {
+    onCollapseChange?.(isCollapsed);
+  }, [isCollapsed, onCollapseChange]);
 
   return (
     <div className={`
-      ${isCollapsed ? 'sidebar-collapsed' : 'sidebar-expanded'} 
-      sidebar-transition glass-effect flex flex-col relative z-20
+      ${isCollapsed ? 'w-16' : 'w-64'} 
+      sidebar-transition glass-effect flex flex-col relative z-20 flex-shrink-0
     `}>
       {/* Header with Logo and Toggle */}
-      <div className="p-3 border-b border-gray-800/50">
-        {!isCollapsed ? (
-          <div className="flex items-center justify-between">
+      <div className="h-16 p-4 border-b border-gray-800/50 flex items-center">
+        <div className={`flex items-center ${isCollapsed ? 'justify-center w-full' : 'justify-between w-full'}`}>
+          {!isCollapsed && (
             <div className="flex items-center space-x-3 overflow-hidden">
-              <div className="flex-shrink-0"> <img src="/logo.png" alt="Pulse Logo" width={32} height={32} className="rounded-lg" /> 
-              </div>
+              <img src="/logo.png" alt="Pulse Logo" width={32} height={32} className="rounded-lg" /> 
               <span className="text-xl font-bold text-white sidebar-logo-text sidebar-logo-text-visible">
                 Pulse
               </span>
             </div>
-            
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={toggleSidebar}
-              className="apple-button text-gray-400 hover:text-white hover:bg-gray-800/50 flex-shrink-0"
-            >
-              <X size={18} />
-            </Button>
-          </div>
-        ) : (
-          <div className="flex justify-center">
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={toggleSidebar}
-              className="apple-button text-gray-400 hover:text-white hover:bg-gray-800/50"
-            >
-              <Menu size={18} />
-            </Button>
-          </div>
-        )}
+          )}
+          
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={toggleSidebar}
+            className="apple-button text-gray-400 hover:text-white hover:bg-gray-800/50 flex-shrink-0 h-8 w-8"
+          >
+            <Menu size={16} />
+          </Button>
+        </div>
       </div>
 
       {/* Navigation */}
@@ -86,7 +80,7 @@ export function Sidebar({ activeTab, setActiveTab }: SidebarProps) {
                 <button
                   onClick={() => setActiveTab(item.id)}
                   className={`
-                    w-full flex items-center space-x-3 px-2 py-2.5 rounded-lg 
+                    w-full flex items-center space-x-3 px-3 py-2.5 rounded-lg 
                     apple-button transition-all duration-200 group relative overflow-hidden
                     ${isActive
                       ? 'bg-gray-800/60 text-white border border-gray-700/50 shadow-lg'
@@ -95,15 +89,18 @@ export function Sidebar({ activeTab, setActiveTab }: SidebarProps) {
                   `}
                   title={isCollapsed ? item.label : undefined}
                 >
-                  <Icon size={20} className="flex-shrink-0" />
+                  <Icon size={18} className="flex-shrink-0" />
                   <span className={`
-                    font-medium sidebar-label whitespace-nowrap
+                    font-medium sidebar-label whitespace-nowrap text-sm
                     ${isCollapsed ? 'sidebar-label-hidden' : 'sidebar-label-visible'}
                   `}>
                     {item.label}
                   </span>
                   
-                    {/* Active indicator */}
+                  {/* Active indicator */}
+                  {/* {isActive && (
+                    <div className="absolute right-3 w-1.5 h-1.5 bg-white rounded-full opacity-60" />
+                  )} */}
                 </button>
               </li>
             );
@@ -119,7 +116,7 @@ export function Sidebar({ activeTab, setActiveTab }: SidebarProps) {
         `}>
           <div className="mb-1">Pulse v2.0</div>
           <div className="flex items-center justify-center space-x-1">
-            <div className="w-2 h-2 bg-green-400 rounded-full pulse-animation"></div>
+            <div className="w-1.5 h-1.5 bg-green-400 rounded-full pulse-animation"></div>
             <span>Live</span>
           </div>
         </div>
