@@ -87,9 +87,9 @@ export default function Home() {
         <div className="flex-1 flex flex-col h-full">
           <TopBar />
           
-          <main className="flex-1 p-4 lg:p-6 overflow-hidden">
+          <main className="flex-1 p-4 lg:p-6 overflow-x-hidden">
             <div className="max-w-7xl mx-auto">
-              <div className="mb-0 overflow-hidden">
+              <div className="scroll-reveal mb-6">
                 <TopMovers/>
                 {/* <h1 className="text-2xl lg:text-3xl font-bold text-white mb-2">
                   Market Intelligence Dashboard

@@ -78,6 +78,10 @@
   }
   body {
     @apply bg-background text-foreground;
+    overflow-x: hidden;
+  }
+  html {
+    overflow-x: hidden;
   }
 }
 
@@ -203,6 +207,25 @@
 
 .scroll-reveal-delay-5 {
   transition-delay: 0.5s;
+}
+
+/* Modern Top Movers Animation */
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-scroll {
+  animation: scroll 40s linear infinite;
+  will-change: transform;
+}
+
+.animate-scroll:hover {
+  animation-play-state: paused;
 }
 
 /* Auto-scroll Animation for Influencer Cards */

@@ -66,6 +66,7 @@ const topMovers = [
 ];
 
 // Duplicate for seamless scrolling
+const duplicatedMovers = [...topMovers, ...topMovers];
 
 
 function MiniSparkline({ data }: { data: number[] }) {
@@ -78,7 +79,7 @@ function MiniSparkline({ data }: { data: number[] }) {
       {data.map((value, index) => (
         <div
           key={index}
-          className="w-1 bg-green-400/70 rounded-t-sm"
+          className="w-1 bg-green-400/70 rounded-t-sm transition-all duration-300"
           style={{
             height: `${((value - min) / range) * 100}%`,
             minHeight: '2px',
@@ -98,9 +99,9 @@ export function TopMovers() {
         {/* <div className="w-1.5 h-1.5 bg-green-400 rounded-full pulse-animation"></div> */}
       </div>
 
-      <div className="overflow-auto">
+      <div className="overflow-hidden">
         <div className="flex space-x-3 animate-scroll">
-          {topMovers.map((mover, index) => (
+          {duplicatedMovers.map((mover, index) => (
             <div
               key={`${mover.id}-${index}`}
               className="flex-shrink-0 w-15 p-3 h-15 glass-effect rounded-xl hover:bg-gray-900/60 transition-all cursor-pointer apple-button border border-gray-800/30"
