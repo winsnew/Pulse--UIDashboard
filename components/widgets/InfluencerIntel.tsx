@@ -235,14 +235,14 @@ export function InfluencerIntel() {
     return reaction.startsWith('+') ? 'text-green-400' : 'text-red-400';
   };
 
-  const filteredStatements = selectedInfluencer 
+  const filteredStatements = selectedInfluencer
     ? influencers.find(inf => inf.id === selectedInfluencer)?.statements.filter(statement => {
-        const matchesSearch = statement.statement.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                            statement.assets.some(asset => asset.toLowerCase().includes(searchTerm.toLowerCase()));
-        const matchesImpact = impactFilter === 'All' || statement.impact === impactFilter;
-        const matchesSentiment = sentimentFilter === 'All' || statement.sentiment === sentimentFilter;
-        return matchesSearch && matchesImpact && matchesSentiment;
-      }) || []
+      const matchesSearch = statement.statement.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        statement.assets.some(asset => asset.toLowerCase().includes(searchTerm.toLowerCase()));
+      const matchesImpact = impactFilter === 'All' || statement.impact === impactFilter;
+      const matchesSentiment = sentimentFilter === 'All' || statement.sentiment === sentimentFilter;
+      return matchesSearch && matchesImpact && matchesSentiment;
+    }) || []
     : [];
 
   const selectedInfluencerData = influencers.find(inf => inf.id === selectedInfluencer);
@@ -325,9 +325,8 @@ export function InfluencerIntel() {
                       ) : (
                         <TrendingDown className="w-3 h-3 text-red-400" />
                       )}
-                      <span className={`text-xs font-medium ${
-                        influencer.sentiment >= 7 ? 'text-green-400' : 'text-red-400'
-                      }`}>
+                      <span className={`text-xs font-medium ${influencer.sentiment >= 7 ? 'text-green-400' : 'text-red-400'
+                        }`}>
                         {influencer.sentiment}/10
                       </span>
                     </div>
@@ -338,8 +337,8 @@ export function InfluencerIntel() {
                       <MessageSquare className="w-3 h-3 text-purple-400" />
                       <span className="text-xs text-gray-400">Statements</span>
                     </div>
-                    <Badge 
-                      variant="outline" 
+                    <Badge
+                      variant="outline"
                       className="text-xs text-blue-400 border-blue-400/30 bg-blue-400/10 font-medium"
                     >
                       {influencer.statements.length} posts
@@ -349,8 +348,8 @@ export function InfluencerIntel() {
 
                 {/* Impact Badge */}
                 <div className="mb-3">
-                  <Badge 
-                    variant="outline" 
+                  <Badge
+                    variant="outline"
                     className={`text-xs font-medium ${getImpactColor(influencer.impact)}`}
                   >
                     {influencer.impact} Impact
@@ -360,17 +359,17 @@ export function InfluencerIntel() {
                 {/* Asset Tags */}
                 <div className="flex flex-wrap gap-1 mb-3">
                   {influencer.assets.slice(0, 3).map((asset) => (
-                    <Badge 
-                      key={asset} 
-                      variant="secondary" 
+                    <Badge
+                      key={asset}
+                      variant="secondary"
                       className="text-xs bg-gray-800/60 text-gray-300 hover:bg-gray-700/60 transition-colors border border-gray-700/30"
                     >
                       {asset}
                     </Badge>
                   ))}
                   {influencer.assets.length > 3 && (
-                    <Badge 
-                      variant="secondary" 
+                    <Badge
+                      variant="secondary"
                       className="text-xs bg-gray-800/60 text-gray-400 border border-gray-700/30"
                     >
                       +{influencer.assets.length - 3}
@@ -501,9 +500,9 @@ export function InfluencerIntel() {
                       </Badge>
                       <div className="flex flex-wrap gap-1">
                         {statement.assets.slice(0, 2).map((asset) => (
-                          <Badge 
-                            key={asset} 
-                            variant="secondary" 
+                          <Badge
+                            key={asset}
+                            variant="secondary"
                             className="text-xs bg-gray-800/60 text-gray-300 border border-gray-700/30 px-1 py-0"
                           >
                             {asset}
