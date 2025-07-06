@@ -95,7 +95,7 @@ export default function Home() {
 
           <main className="flex-1 p-4 max-w-full lg:p-6 overflow-x-hidden">
             <div className="w-full mx-auto">
-              <div className="grid grid-cols-1 lg:grid-cols-12 gap-3">
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-2">
                 <div className="lg:col-span-12 scroll-reveal mb-0">
                   <TopMovers />
                 </div>
