@@ -75,7 +75,7 @@ function MiniSparkline({ data }: { data: number[] }) {
   const range = max - min || 1;
 
   return (
-    <div className="flex items-end space-x-px h-4 w-12">
+    <div className="flex items-end space-x-px h-4 w-full">
       {data.map((value, index) => (
         <div
           key={index}
@@ -100,35 +100,29 @@ export function TopMovers() {
       </div>
 
       <div className="overflow-hidden">
-        <div className="flex space-x-3 animate-scroll ">
+        <div className="flex space-x-2 animate-scroll">
           {duplicatedMovers.map((mover, index) => (
             <div
               key={`${mover.id}-${index}`}
-              className="flex-shrink-0 w-40 sm:w-44 md:w-48 p-3 h-28 glass-effect rounded-xl hover:bg-gray-900/60 transition-all cursor-pointer apple-button border border-gray-800/30"
+              className="flex-shrink-0 w-32 sm:w-36 md:w-40 h-20 p-2 glass-effect rounded-lg flex flex-col justify-center items-center hover:bg-gray-900/60 transition-all cursor-pointer apple-button border border-gray-800/30"
             >
-              <div className="flex justify-between mb-1">
-                <div className="flex items-center space-x-3 ">
-                  <span className="text-small">{mover.icon}</span>
-                  <div>
-                    <h3 className="font-semibold text-white text-sm flex items-center">{mover.symbol}
-                      <div className={`text-xs flex px-2 items-center space-x-1 ${mover.isPositive ? 'text-green-400' : 'text-red-400'
-                        }`}>
-                        {mover.isPositive ? (
-                          <TrendingUp className="w-3 h-3" />
-                        ) : (
-                          <TrendingDown className="w-3 h-3" />
-                        )}
-                        <span className="text-xs">{mover.change}</span>
-                      </div>
-                    </h3>
-                  </div>
+              {/* Baris Atas */}
+              <div className="flex items-center justify-center space-x-2">
+                <span className="text-base">{mover.icon}</span>
+                <span className="text-xs text-white font-semibold">{mover.symbol}</span>
+                <div className={`flex items-center text-xs ${mover.isPositive ? 'text-green-400' : 'text-red-400'}`}>
+                  {mover.isPositive ? (
+                    <TrendingUp className="w-3 h-3" />
+                  ) : (
+                    <TrendingDown className="w-3 h-3" />
+                  )}
+                  <span className="ml-0.5">{mover.change}</span>
                 </div>
               </div>
 
-              <div className="flex items-center">
-                <div>
-                  <div className="text-sm font-medium text-white px-5">{mover.price}</div>
-                </div>
+              {/* Baris Bawah */}
+              <div className="flex items-center justify-center space-x-3 mt-1">
+                <span className="text-xs font-medium text-white">{mover.price}</span>
                 <MiniSparkline data={mover.sparkline} />
               </div>
             </div>
