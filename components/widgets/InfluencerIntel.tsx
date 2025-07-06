@@ -252,7 +252,7 @@ export function InfluencerIntel() {
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center space-x-3">
           <div className="w-2 h-2 bg-gradient-to-r from-blue-400 to-purple-500 rounded-full animate-pulse"></div>
-          <h2 className="text-xl font-bold bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
+          <h2 className="text-xl font-bold bg-gradient-to-r from-white to-gray-300 bg-clip-text text-white">
             Influencer Intel
           </h2>
         </div>

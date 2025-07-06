@@ -248,7 +248,7 @@
 
 .auto-scroll-content {
   display: flex;
-  animation: autoScroll 1s linear infinite;
+  animation: autoScroll 10s linear infinite;
   will-change: transform;
 }
 
