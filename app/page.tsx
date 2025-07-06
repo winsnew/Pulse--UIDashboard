@@ -72,34 +72,33 @@ function useScrollReveal() {
   }, []);
 }
 
+
 export default function Home() {
   const [activeTab, setActiveTab] = useState('home');
-  
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
   useScrollReveal();
+  const handleTabChange = (tab: string) => {
+    setActiveTab(tab);
+    setIsSidebarOpen(false);
+  };
 
   return (
-    <div className="min-h-screen" style={{ backgroundColor: '#000000' }}>
+    <div className="min-h-screen relative" style={{ backgroundColor: '#000000' }}>
       <AnimatedBackground />
-      
-      <div className="flex relative z-10">
-        <Sidebar activeTab={activeTab} setActiveTab={setActiveTab} />
-        
-        <div className="flex-1 flex flex-col h-full">
-          <TopBar />
-          
-          <main className="flex-1 p-4 lg:p-6 overflow-x-hidden">
-            <div className="max-w-7xl mx-auto">
-              <div className="scroll-reveal mb-6">
-                <TopMovers/>
-                {/* <h1 className="text-2xl lg:text-3xl font-bold text-white mb-2">
-                  Market Intelligence Dashboard
-                </h1>
-                <p className="text-gray-400">
-                  Real-time insights powered by AI for smarter trading decisions
-                </p> */}
-              </div>
 
+      <div className="flex relative z-10">
+        <Sidebar activeTab={activeTab} setActiveTab={handleTabChange} isMobileOpen={isSidebarOpen} onMobileClose={() => setIsSidebarOpen(false)} />
+
+        <div className="flex-1 flex flex-col pt-16 lg:pt-0 h-full">
+          <TopBar onToggleMobileSidebar={() => setIsSidebarOpen(true)} />
+
+          <main className="flex-1 p-4 max-w-full lg:p-6 overflow-x-hidden">
+            <div className="w-full mx-auto">
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+                <div className="lg:col-span-12 scroll-reveal mb-5">
+                  <TopMovers />
+                </div>
                 {/* Left Column - Main Widgets */}
                 <div className="lg:col-span-8 space-y-6">
                   <div className="scroll-reveal scroll-reveal-delay-1">
