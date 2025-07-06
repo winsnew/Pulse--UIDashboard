@@ -106,7 +106,6 @@ export function TopMovers() {
               key={`${mover.id}-${index}`}
               className="flex-shrink-0 w-32 sm:w-36 md:w-40 h-20 p-2 glass-effect rounded-lg flex flex-col justify-center items-center hover:bg-gray-900/60 transition-all cursor-pointer apple-button border border-gray-800/30"
             >
-              {/* Baris Atas */}
               <div className="flex items-center justify-center space-x-2">
                 <span className="text-base">{mover.icon}</span>
                 <span className="text-xs text-white font-semibold">{mover.symbol}</span>
@@ -120,7 +119,6 @@ export function TopMovers() {
                 </div>
               </div>
 
-              {/* Baris Bawah */}
               <div className="flex items-center justify-center space-x-3 mt-1">
                 <span className="text-xs font-medium text-white">{mover.price}</span>
                 <MiniSparkline data={mover.sparkline} />
